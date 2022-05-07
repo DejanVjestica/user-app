@@ -1,23 +1,19 @@
 import React, { useState } from 'react'
+
 import styles from './Form.module.scss'
+import { UserType } from '../../App.types'
+
 import { Button } from '../UI/button/Button'
 
 type UserDataProps = {
-	name: string
-	age: string
+	onNewUserSave: (user: UserType) => void
 }
 
-export const Form = (): JSX.Element => {
-	const [userData, setUserData] = useState<UserDataProps>({
+export const Form = (props: UserDataProps): JSX.Element => {
+	const [userData, setUserData] = useState<UserType>({
 		name: '',
 		age: ''
 	})
-
-	const onSubmitHandler = (
-		event: React.FormEvent<HTMLFormElement>
-	): void => {
-		event.preventDefault()
-	}
 
 	const nameChangeHandler = (
 		event: React.ChangeEvent<HTMLInputElement>
@@ -39,6 +35,13 @@ export const Form = (): JSX.Element => {
 				age: event.target.value
 			}
 		})
+	}
+
+	const onSubmitHandler = (
+		event: React.FormEvent<HTMLFormElement>
+	): void => {
+		event.preventDefault()
+		props.onNewUserSave(userData)
 	}
 
 	return (
