@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { User } from './User'
+import styles from './UserList.module.scss'
 
 import { UserType } from '../../App.types'
 
@@ -10,7 +11,7 @@ type UserListProps = {
 
 export const UserList = (props: UserListProps): JSX.Element => {
 	return (
-		<li>
+		<li className={styles['user-list']}>
 			{props.users.map((user) => {
 				return (
 					<User

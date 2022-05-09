@@ -67,7 +67,7 @@ export const Form = (props: UserDataProps): JSX.Element => {
 
 	return (
 		<form className={styles.form} onSubmit={onSubmitHandler}>
-			<div>
+			<div className={styles.form__control}>
 				<label htmlFor="name">Name</label>
 				<input
 					type="text"
@@ -76,7 +76,7 @@ export const Form = (props: UserDataProps): JSX.Element => {
 					onChange={nameChangeHandler}
 					value={userData.name}></input>
 			</div>
-			<div>
+			<div className={styles.form__control}>
 				<label htmlFor="age">Age</label>
 				<input
 					type="number"

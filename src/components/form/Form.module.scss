@@ -1,2 +1,29 @@
 .form {
+	padding: 1rem 2rem 3rem;
+	background-color: rgb(44, 172, 207);
+}
+
+.form__control {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	margin-bottom: 1rem;
+
+	label {
+		color: white;
+		font-size: small;
+		font-weight: bold;
+		margin-bottom: 0.5rem;
+	}
+
+	input {
+		flex: 100%;
+		border: none;
+		padding: 0.5rem;
+	}
+
+	&:last-of-type {
+		margin-bottom: 2rem;
+	}
 }

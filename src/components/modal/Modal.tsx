@@ -1,5 +1,7 @@
 import React from 'react'
 
+import styles from './Modal.module.scss'
+
 import { Button } from '../UI/button/Button'
 import { modalState } from '../../App.types'
 
@@ -21,9 +23,11 @@ export const Modal = (props: ModalProps): JSX.Element | null => {
 		return null
 	}
 	return (
-		<aside className="modal">
-			<p>{props.text}</p>
-			<Button onClick={onClickHandler}>Close</Button>
+		<aside className={styles.modal}>
+			<div className={styles.modal__content}>
+				<p>{props.text}</p>
+				<Button onClick={onClickHandler}>Close</Button>
+			</div>
 		</aside>
 	)
 }

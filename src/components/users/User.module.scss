@@ -1,0 +1,14 @@
+.list-item {
+	padding: 1rem 2rem;
+	color: white;
+	margin: unset;
+	border-bottom: 1px solid white;
+
+	p {
+		margin: unset;
+	}
+
+	&:last-of-type {
+		border-bottom: none;
+	}
+}
