@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 
 import styles from './Form.module.scss'
-import { UserType } from '../../App.types'
+import { UserType, modalState } from '../../App.types'
 
 import { Button } from '../UI/button/Button'
 
 type UserDataProps = {
 	onNewUserSave: (user: UserType) => void
+	onUnvalidateinput: (data: modalState) => void
 }
 
 export const Form = (props: UserDataProps): JSX.Element => {
@@ -41,7 +42,22 @@ export const Form = (props: UserDataProps): JSX.Element => {
 		event: React.FormEvent<HTMLFormElement>
 	): void => {
 		event.preventDefault()
-		props.onNewUserSave(userData)
+
+		if (userData.name.length <= 0 || userData.age.length <= 0) {
+			const modalData = {
+				text: 'not valid',
+				isValid: true
+			}
+			props.onUnvalidateinput(modalData)
+		} else {
+			props.onNewUserSave(userData)
+
+			const modalData = {
+				text: '',
+				isValid: false
+			}
+			props.onUnvalidateinput(modalData)
+		}
 	}
 
 	return (
