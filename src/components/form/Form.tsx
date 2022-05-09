@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 
 import styles from './Form.module.scss'
-import { UserType, modalState } from '../../App.types'
+import { UserType, ModalState, ErrorMessages } from '../../App.types'
 
 import { Button } from '../UI/button/Button'
 
 type UserDataProps = {
 	onNewUserSave: (user: UserType) => void
-	onUnvalidateinput: (data: modalState) => void
+	toogleModal: (data: ModalState) => void
+	errorMessages: ErrorMessages
 }
 
 export const Form = (props: UserDataProps): JSX.Element => {
@@ -43,12 +44,34 @@ export const Form = (props: UserDataProps): JSX.Element => {
 	): void => {
 		event.preventDefault()
 
-		if (userData.name.length <= 0 || userData.age.length <= 0) {
-			const modalData = {
-				text: 'not valid',
-				isValid: true
+		const isNameEmpty = userData.name.length === 0
+		const isAgeEmpty =
+			userData.age.length <= 0 || parseInt(userData.age) <= 0
+
+		const setAgeErrorText = (value: string): string => {
+			if (value.length <= 0) {
+				return props.errorMessages.ageMissing
+			} else {
+				return props.errorMessages.ageIsMinus
 			}
-			props.onUnvalidateinput(modalData)
+		}
+
+		if (isNameEmpty || isAgeEmpty) {
+			let errorText = ''
+
+			errorText = props.errorMessages.both
+
+			if (isNameEmpty && !isAgeEmpty) {
+				errorText = props.errorMessages.name
+			}
+			if (isAgeEmpty && !isNameEmpty) {
+				errorText = setAgeErrorText(userData.age)
+			}
+
+			props.toogleModal({
+				text: errorText,
+				isValid: true
+			})
 		} else {
 			props.onNewUserSave(userData)
 
@@ -57,11 +80,10 @@ export const Form = (props: UserDataProps): JSX.Element => {
 				age: ''
 			})
 
-			const modalData = {
+			props.toogleModal({
 				text: '',
 				isValid: false
-			}
-			props.onUnvalidateinput(modalData)
+			})
 		}
 	}
 

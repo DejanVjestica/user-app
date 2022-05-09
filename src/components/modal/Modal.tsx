@@ -3,12 +3,12 @@ import React from 'react'
 import styles from './Modal.module.scss'
 
 import { Button } from '../UI/button/Button'
-import { modalState } from '../../App.types'
+import { ModalState } from '../../App.types'
 
 type ModalProps = {
 	toogle: boolean
 	text: string
-	toogleModal: (data: modalState) => void
+	toogleModal: (data: ModalState) => void
 }
 
 export const Modal = (props: ModalProps): JSX.Element | null => {

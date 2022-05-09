@@ -3,7 +3,14 @@ export type UserType = {
 	age: string
 }
 
-export type modalState = {
+export type ModalState = {
 	text?: string
 	isValid: boolean
+}
+
+export type ErrorMessages = {
+	name: string
+	ageMissing: string
+	ageIsMinus: string
+	both: string
 }
