@@ -31,7 +31,8 @@ export const App = (): JSX.Element => {
 		<div className={styles.main}>
 			<Form
 				onNewUserSave={onAddNewUser}
-				onUnvalidateinput={toogleModal}></Form>
+				onUnvalidateinput={toogleModal}
+			/>
 			<UserList users={users}></UserList>
 			<Modal
 				toogle={modal.isValid}
