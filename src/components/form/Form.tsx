@@ -52,6 +52,11 @@ export const Form = (props: UserDataProps): JSX.Element => {
 		} else {
 			props.onNewUserSave(userData)
 
+			setUserData({
+				name: '',
+				age: ''
+			})
+
 			const modalData = {
 				text: '',
 				isValid: false
