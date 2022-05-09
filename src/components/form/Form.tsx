@@ -44,9 +44,10 @@ export const Form = (props: UserDataProps): JSX.Element => {
 	): void => {
 		event.preventDefault()
 
-		const isNameEmpty = userData.name.length === 0
+		const isNameEmpty = userData.name.trim().length === 0
 		const isAgeEmpty =
-			userData.age.length <= 0 || parseInt(userData.age) <= 0
+			userData.age.trim().length <= 0 ||
+			parseInt(userData.age.trim()) <= 0
 
 		const setAgeErrorText = (value: string): string => {
 			if (value.length <= 0) {
