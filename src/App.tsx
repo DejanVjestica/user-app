@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 import React, { useState } from 'react'
 
 import styles from './App.module.scss'
@@ -36,16 +37,21 @@ export const App = (): JSX.Element => {
 
 	return (
 		<div className={styles.main}>
-			<Form
-				errorMessages={errorMessages}
-				onNewUserSave={onAddNewUser}
-				toogleModal={toogleModal}
-			/>
-			<UserList users={users}></UserList>
-			<Modal
-				toogle={modal.isNotValid}
-				text={modal.text as string}
-				toogleModal={toogleModal}></Modal>
+			{!modal.isNotValid ? (
+				<>
+					<Form
+						errorMessages={errorMessages}
+						onNewUserSave={onAddNewUser}
+						toogleModal={toogleModal}
+					/>
+					<UserList users={users}></UserList>
+				</>
+			) : (
+				<Modal
+					toogle={modal.isNotValid}
+					text={modal.text as string}
+					toogleModal={toogleModal}></Modal>
+			)}
 		</div>
 	)
 }
