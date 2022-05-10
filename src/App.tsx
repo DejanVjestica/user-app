@@ -37,16 +37,13 @@ export const App = (): JSX.Element => {
 
 	return (
 		<div className={styles.main}>
-			{!error.isNotValid ? (
-				<>
-					<Form
-						errorMessages={errorMessages}
-						onNewUserSave={onAddNewUser}
-						toogleModal={toogleModal}
-					/>
-					<UserList users={users}></UserList>
-				</>
-			) : (
+			<Form
+				errorMessages={errorMessages}
+				onNewUserSave={onAddNewUser}
+				toogleModal={toogleModal}
+			/>
+			<UserList users={users}></UserList>
+			{error.isNotValid && (
 				<Modal
 					text={error.text as string}
 					toogleModal={toogleModal}></Modal>
