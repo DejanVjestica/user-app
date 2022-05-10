@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 
 import styles from './App.module.scss'
-import { UserType, ModalState, ErrorMessages } from './App.types'
+import { UserType, ErrorState, ErrorMessages } from './App.types'
 
 import { Form } from './components/form/Form'
 import { UserList } from './components/users/userList'
@@ -10,7 +10,7 @@ import { Modal } from './components/modal/Modal'
 
 export const App = (): JSX.Element => {
 	const [users, setUsers] = useState<UserType[]>([])
-	const [modal, setModal] = useState<ModalState>({
+	const [error, setError] = useState<ErrorState>({
 		text: '',
 		isNotValid: false
 	})
@@ -28,8 +28,8 @@ export const App = (): JSX.Element => {
 		})
 	}
 
-	const toogleModal = (data: ModalState): void => {
-		setModal({
+	const toogleModal = (data: ErrorState): void => {
+		setError({
 			text: data.text,
 			isNotValid: data.isNotValid
 		})
@@ -37,7 +37,7 @@ export const App = (): JSX.Element => {
 
 	return (
 		<div className={styles.main}>
-			{!modal.isNotValid ? (
+			{!error.isNotValid ? (
 				<>
 					<Form
 						errorMessages={errorMessages}
@@ -48,8 +48,7 @@ export const App = (): JSX.Element => {
 				</>
 			) : (
 				<Modal
-					toogle={modal.isNotValid}
-					text={modal.text as string}
+					text={error.text as string}
 					toogleModal={toogleModal}></Modal>
 			)}
 		</div>

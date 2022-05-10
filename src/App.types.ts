@@ -3,7 +3,7 @@ export type UserType = {
 	age: string
 }
 
-export type ModalState = {
+export type ErrorState = {
 	text?: string
 	isNotValid: boolean
 }

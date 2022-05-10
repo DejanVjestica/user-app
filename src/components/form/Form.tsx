@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 
 import styles from './Form.module.scss'
-import { UserType, ModalState, ErrorMessages } from '../../App.types'
+import { UserType, ErrorState, ErrorMessages } from '../../App.types'
 
 import { Button } from '../UI/button/Button'
 
 type UserDataProps = {
 	onNewUserSave: (user: UserType) => void
-	toogleModal: (data: ModalState) => void
+	toogleModal: (data: ErrorState) => void
 	errorMessages: ErrorMessages
 }
 
