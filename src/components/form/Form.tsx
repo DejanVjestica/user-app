@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef } from 'react'
 
 import styles from './Form.module.scss'
 import { UserType, ErrorState, ErrorMessages } from '../../App.types'
@@ -12,42 +12,21 @@ type UserDataProps = {
 }
 
 export const Form = (props: UserDataProps): JSX.Element => {
-	const [userData, setUserData] = useState<UserType>({
-		name: '',
-		age: ''
-	})
-
-	const nameChangeHandler = (
-		event: React.ChangeEvent<HTMLInputElement>
-	) => {
-		setUserData((prevState) => {
-			return {
-				...prevState,
-				name: event.target.value
-			}
-		})
-	}
-
-	const ageChangeHandler = (
-		event: React.ChangeEvent<HTMLInputElement>
-	): void => {
-		setUserData((prevState) => {
-			return {
-				...prevState,
-				age: event.target.value
-			}
-		})
-	}
+	const nameInputRef = useRef<HTMLInputElement>(null)
+	const ageInputRef = useRef<HTMLInputElement>(null)
 
 	const onSubmitHandler = (
 		event: React.FormEvent<HTMLFormElement>
 	): void => {
 		event.preventDefault()
 
-		const isNameEmpty = userData.name.trim().length === 0
+		const enteredName = nameInputRef.current?.value
+		const enteredAge = ageInputRef.current?.value
+
+		const isNameEmpty = (enteredName as string).trim().length === 0
 		const isAgeEmpty =
-			userData.age.trim().length <= 0 ||
-			parseInt(userData.age.trim()) <= 0
+			(enteredAge as string).trim().length <= 0 ||
+			parseInt((enteredAge as string).trim()) <= 0
 
 		const setAgeErrorText = (value: string): string => {
 			if (value.length <= 0) {
@@ -66,7 +45,9 @@ export const Form = (props: UserDataProps): JSX.Element => {
 				errorText = props.errorMessages.name
 			}
 			if (isAgeEmpty && !isNameEmpty) {
-				errorText = setAgeErrorText(userData.age)
+				errorText = setAgeErrorText(
+					enteredAge as string
+				)
 			}
 
 			props.toogleModal({
@@ -74,17 +55,23 @@ export const Form = (props: UserDataProps): JSX.Element => {
 				isNotValid: true
 			})
 		} else {
-			props.onNewUserSave(userData)
-
-			setUserData({
-				name: '',
-				age: ''
+			props.onNewUserSave({
+				name: enteredName as string,
+				age: enteredAge as string
 			})
 
 			props.toogleModal({
 				text: '',
 				isNotValid: false
 			})
+
+			if (
+				nameInputRef.current !== null &&
+				ageInputRef.current !== null
+			) {
+				nameInputRef.current.value = ''
+				ageInputRef.current.value = ''
+			}
 		}
 	}
 
@@ -96,8 +83,7 @@ export const Form = (props: UserDataProps): JSX.Element => {
 					type="text"
 					name="name"
 					id="name"
-					onChange={nameChangeHandler}
-					value={userData.name}></input>
+					ref={nameInputRef}></input>
 			</div>
 			<div className={styles.form__control}>
 				<label htmlFor="age">Age</label>
@@ -105,8 +91,7 @@ export const Form = (props: UserDataProps): JSX.Element => {
 					type="number"
 					name="age"
 					id="age"
-					onChange={ageChangeHandler}
-					value={userData.age}></input>
+					ref={ageInputRef}></input>
 			</div>
 			<Button type="submit">add new user</Button>
 		</form>
