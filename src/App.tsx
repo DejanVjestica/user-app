@@ -11,7 +11,7 @@ export const App = (): JSX.Element => {
 	const [users, setUsers] = useState<UserType[]>([])
 	const [modal, setModal] = useState<ModalState>({
 		text: '',
-		isValid: false
+		isNotValid: false
 	})
 
 	const errorMessages: ErrorMessages = {
@@ -30,7 +30,7 @@ export const App = (): JSX.Element => {
 	const toogleModal = (data: ModalState): void => {
 		setModal({
 			text: data.text,
-			isValid: data.isValid
+			isNotValid: data.isNotValid
 		})
 	}
 
@@ -43,7 +43,7 @@ export const App = (): JSX.Element => {
 			/>
 			<UserList users={users}></UserList>
 			<Modal
-				toogle={modal.isValid}
+				toogle={modal.isNotValid}
 				text={modal.text as string}
 				toogleModal={toogleModal}></Modal>
 		</div>

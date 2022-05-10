@@ -15,7 +15,7 @@ export const Modal = (props: ModalProps): JSX.Element | null => {
 	const onClickHandler = (): void => {
 		props.toogleModal({
 			text: '',
-			isValid: false
+			isNotValid: false
 		})
 	}
 

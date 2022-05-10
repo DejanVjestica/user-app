@@ -71,7 +71,7 @@ export const Form = (props: UserDataProps): JSX.Element => {
 
 			props.toogleModal({
 				text: errorText,
-				isValid: true
+				isNotValid: true
 			})
 		} else {
 			props.onNewUserSave(userData)
@@ -83,7 +83,7 @@ export const Form = (props: UserDataProps): JSX.Element => {
 
 			props.toogleModal({
 				text: '',
-				isValid: false
+				isNotValid: false
 			})
 		}
 	}

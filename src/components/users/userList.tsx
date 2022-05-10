@@ -15,7 +15,7 @@ export const UserList = (props: UserListProps): JSX.Element => {
 			{props.users.map((user) => {
 				return (
 					<User
-						key={Math.random()}
+						key={Math.random().toString()}
 						user={user}></User>
 				)
 			})}

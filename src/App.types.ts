@@ -5,7 +5,7 @@ export type UserType = {
 
 export type ModalState = {
 	text?: string
-	isValid: boolean
+	isNotValid: boolean
 }
 
 export type ErrorMessages = {
